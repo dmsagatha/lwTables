@@ -32,7 +32,7 @@ class FakerSeeder extends Seeder
       ['name' => 'Apple Inc',         'slug' => 'Mac'],
       ['name' => 'Lenovo Group Ltd',  'slug' => 'Lenovo'],
     ]);
-
+    
     // Crear Periféricos (Cpu, Pantalla, Teclado, Puntero, Parlantes y Audifonos)
     Peripheral::factory()->times(3)->create()->each(function ($peripheral) {
         Screen::factory()->create(['peripheral_id' => $peripheral->id]);
