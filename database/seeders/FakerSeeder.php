@@ -34,7 +34,7 @@ class FakerSeeder extends Seeder
     ]);
     
     // Crear Periféricos (Cpu, Pantalla, Teclado, Puntero, Parlantes y Audifonos)
-    Peripheral::factory()->times(3)->create()->each(function ($peripheral) {
+    Peripheral::factory()->times(50)->create()->each(function ($peripheral) {
         Screen::factory()->create(['peripheral_id' => $peripheral->id]);
       /* if ($peripheral->per_type === 'screen') {
       } */
