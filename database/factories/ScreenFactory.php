@@ -10,7 +10,7 @@ class ScreenFactory extends Factory
 {
   protected $model = Screen::class;
   
-  public function definition()
+  public function definition(): array
   {
     $brands = Brand::pluck('id')->all();
 

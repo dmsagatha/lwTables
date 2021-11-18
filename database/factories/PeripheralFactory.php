@@ -10,7 +10,7 @@ class PeripheralFactory extends Factory
 {
   protected $model = Peripheral::class;
   
-  public function definition()
+  public function definition(): array
   {
     $users = User::pluck('id')->all();
 
