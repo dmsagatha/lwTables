@@ -11,12 +11,32 @@ class Screens extends Component
 {
   use WithPagination, DataTables;
 
-  //public $screens;
+  public $screen;
+  public $screenId = null;
+  public $searchColumns = ['serial', 'size', 'brand.slug', 'peripheral.inventory'];
+
+  protected $model = Screen::class;
+  protected $relation = ['brand', 'peripheral'];
+
+  public function mount()
+  {
+    $this->setPaginationOption([10, 15, 20, 50]);
+  }
 
   public function render()
   {
     return view('livewire.admin.screens', [
-      'screens' => Screen::all(),
+      'screens' => $this->screens,    //Screen::all()
     ]);
+  }
+
+  public function getScreensProperty()
+  {
+    return $this->screensQuery->paginate($this->paginate);
+  }
+
+  public function getScreensQueryProperty()
+  {
+    return $this->getQuery();
   }
 }
