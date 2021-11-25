@@ -110,6 +110,18 @@
       <thead>
         <tr>
           <th class="cursor-pointer w-20">
+            <label
+                class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+                <input id="selectAll" type="checkbox"
+                    class="form-checkbox focus:outline-none focus:shadow-outline"
+                    x-on:click="selectAllCheckbox($event);">
+            </label>
+          </th>
+          <template x-for="heading in columns">
+              <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs"
+                  x-text="heading.value" :x-ref="heading.key" :class="{ [heading.key]: true }"></th>
+          </template>
+          {{-- <th class="cursor-pointer w-20">
             ID
           </th>
           <th class="cursor-pointer">
@@ -117,7 +129,7 @@
           </th>
           <th class="cursor-pointer w-36">
             Tamaño
-          </th>
+          </th> --}}
           <th scope="col" class="relative">
             <span class="sr-only">Acciones</span>
           </th>
@@ -126,9 +138,19 @@
       <tbody>
         @forelse ($screens as $item)
         <tr>
+          <td class="border-dashed border-t border-gray-200 px-3">
+              <label
+                  class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+                  <input type="checkbox"
+                      class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline"
+                      :name="{{ $item->id }}" x-on:click="getRowDetail($event, {{ $item->id }})">
+              </label>
+          </td>
           <td class="text-center">{{ $item->id }}</td>
           <td class="text-center">{{ $item->serial }}</td>
           <td>{{ $item->size }}</td>
+          <td>{{ $item->brand->slug }}</td>
+          <td>{{ $item->peripheral->inventory }}</td>
           <td>
             Acciones
           </td>

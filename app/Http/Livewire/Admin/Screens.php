@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Screen;
+use App\Models\{Screen, Brand};
 use App\Traits\DataTables;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -14,6 +14,15 @@ class Screens extends Component
   public $screen;
   public $screenId = null;
   public $searchColumns = ['serial', 'size', 'brand.slug', 'peripheral.inventory'];
+
+  public $columns = [
+      ['key' => 'id', 'value' => 'ID'],
+      ['key' => 'serial', 'value' => 'Serial'],
+      ['key' => 'size', 'value' => 'Tamaño'],
+      ['key' => 'brand', 'value' => 'Marca'],
+      ['key' => 'peripheral', 'value' => 'Periférico'],
+      ['key' => 'inventary', 'value' => 'No. Inventario'],
+  ];
 
   protected $model = Screen::class;
   protected $relation = ['brand', 'peripheral'];
@@ -27,6 +36,7 @@ class Screens extends Component
   {
     return view('livewire.admin.screens', [
       'screens' => $this->screens,    //Screen::all()
+      'brands'  => Brand::all(),
     ]);
   }
 
