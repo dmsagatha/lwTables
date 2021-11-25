@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Brand;
 use App\Models\Peripheral;
 use App\Models\Screen;
@@ -16,15 +15,6 @@ class FakerSeeder extends Seeder
     Screen::query()->delete();
     Peripheral::query()->delete();
     Brand::query()->delete();
-    User::query()->delete();
-    
-    User::create([
-      'name'     => 'Super Admin',
-      'email'    => 'superadmin@admin.net',
-      'password' => bcrypt('superadmin'),
-    ]);
-
-    User::factory(19)->create();
     
     DB::table('brands')->insert([
       ['name' => 'Dell',              'slug' => 'Dell'],
