@@ -1,3 +1,31 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.table {
+  @apply w-full table-auto border border-b border-gray-400 divide-y divide-gray-300 font-light overflow-hidden;
+}
+
+.table thead {
+  @apply bg-blue-400 text-white text-xs text-center uppercase;
+}
+
+.table thead tr th {
+  @apply font-bold py-3;
+}
+
+.table tr {
+  @apply align-middle;
+}
+
+.table tbody {
+  @apply bg-white divide-y divide-gray-300;
+}
+
+.table tbody tr {
+  @apply text-gray-800 text-sm hover:bg-gray-100;
+}
+
+.table tbody tr td {
+  @apply px-3 py-1;
+}
