@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -27,11 +29,24 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
+    'gender',
+    'phone',
+    'role_id'
   ];
 
-  public function peripherals()
+  public function peripherals(): HasMany
   {
     return $this->hasMany(Peripheral::class, 'usersabs_id', 'id');
+  }
+
+  public function role(): BelongsTo
+  {
+    return $this->belongsTo(Role::class);
+  }
+
+  public function posts(): HasMany
+  {
+    return $this->hasMany(Post::class);
   }
 
   /**

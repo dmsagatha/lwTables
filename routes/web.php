@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Admin\Screens;
+use App\Http\Livewire\Admin\UserComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,5 @@ Route::get('/', function () {
 Route::group(["middleware" => ["auth:sanctum", "verified"]], function () {
   Route::view("/dashboard", "dashboard")->name("dashboard");
   Route::get("pantallas", Screens::class)->name("screens.index");
+  Route::get('/usuarios', UserComponent::class);
 });

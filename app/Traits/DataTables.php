@@ -7,14 +7,14 @@ use Illuminate\Support\Str;
 trait DataTables
 {
   public $paginate = 10;
-  public $defaultPageOptions = [10, 20, 30];
+  public $defaultPageOptions = [10, 20, 30, 50, 100];
   public $search = "";
   public $sortColumn = 'id';
   public $sortDirection = 'asc';
 
-  public $selected   = [];
+  public $selected = [];
   public $selectPage = false;
-  public $selectAll  = false;
+  public $selectAll = false;
 
   protected $query;
 
@@ -33,11 +33,10 @@ trait DataTables
   public function buildDBQuery()
   {
     $this->query = $this->builder();
-
     $this
-      ->loadRelation()  // Cargar relación si esta definida
-      ->searchRecord()  // Realizar busqueda
-      ->sortRecord();   // Ordenar registros
+      ->loadRelation() //load relation if defined
+      ->searchRecord() //perform search
+      ->sortRecord(); //sort records
   }
 
   public function loadRelation()
@@ -113,9 +112,19 @@ trait DataTables
     $this->resetPage();
   }
 
-  public function setPaginationOption($options)
+  public function export()
   {
-    $this->defaultPageOptions = $options;
+    return Excel::download(new DatatableExport($this->getQuery()->get()), 'DatatableExport.xlsx');
+  }
+
+  public function exportSelected()
+  {
+    $query = $this->getQuery()
+      ->whereKey($this->selected)
+      ->get();
+
+    $heading = array_column($this->columns, 'value');
+    return Excel::download(new DatatableExport($query, $heading), 'DatatableExport.xlsx');
   }
 
   public function deleteSelected()
@@ -138,5 +147,10 @@ trait DataTables
       'message' => 'Record deleted Successfully',
       'type' => 'success'
     ]);
+  }
+
+  public function setPaginationOption($options)
+  {
+    $this->defaultPageOptions = $options;
   }
 }

@@ -20,12 +20,12 @@ class Screens extends Component
       ['key' => 'serial', 'value' => 'Serial'],
       ['key' => 'size', 'value' => 'Tamaño'],
       ['key' => 'brand', 'value' => 'Marca'],
-      ['key' => 'peripheral', 'value' => 'Periférico'],
       ['key' => 'inventary', 'value' => 'No. Inventario'],
+      ['key' => 'name', 'value' => 'Responsable'],
   ];
 
   protected $model = Screen::class;
-  protected $relation = ['brand', 'peripheral'];
+  protected $relation = ['brand', 'peripheral.usersabs'];
 
   public function mount()
   {

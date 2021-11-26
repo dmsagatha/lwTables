@@ -5348,6 +5348,35 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
+window.onload = function (event) {
+  toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: true,
+    progressBar: true,
+    positionClass: "toast-top-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "5000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
+  };
+};
+
+window.addEventListener("showToast", function (event) {
+  var _event$detail$title;
+
+  toastr[event.detail.type](event.detail.message, (_event$detail$title = event.detail.title) !== null && _event$detail$title !== void 0 ? _event$detail$title : "");
+});
+window.addEventListener("hideModal", function (event) {
+  $(event.detail.modalId).modal("hide");
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5364,7 +5393,9 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.toastr = require("toastr");
+// window.Swal = require("sweetalert2");
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

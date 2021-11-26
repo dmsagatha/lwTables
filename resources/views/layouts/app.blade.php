@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @stack('styles')
 
     @livewireStyles
 
@@ -42,5 +43,12 @@
     @stack('modals')
 
     @livewireScripts
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+
+
+
+    @stack('scripts')
   </body>
 </html>
